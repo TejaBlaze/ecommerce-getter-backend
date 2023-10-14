@@ -1,3 +1,4 @@
+import os
 from algoliasearch.search_client import SearchClient
 
 def upload_to_algolia(data):

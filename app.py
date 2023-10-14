@@ -51,19 +51,19 @@ def scrape_safeway_store():
     
     # Return the query result as JSON
     data = search_safeway(product)
-    # itemsV2_array = data['data']['search']['searchResult']['itemStacks'][0]['itemsV2']
-    # for product_data in itemsV2_array:
-    #     # TODO: Extract the data from the response and sanitize
-    #     extracted_data = {
-    #         "objectID": product_data.get("id", "N/A"),
-    #         "name": product_data.get("name", "N/A"),
-    #         "basePrice": product_data['priceInfo']['currentPrice'].get('price', "N/A"),
-    #         "unitOfMeasure": product_data.get("salesUnitType", "N/A"),
-    #         "pricePer": product_data['priceInfo']['unitPrice'].get('priceString', "N/A"),
-    #         "averageWeight": product_data.get("weightIncrement", "N/A"),
-    #         "storeName": "Walmart",
-    #     }
-    #     upload_to_algolia(extracted_data)
+    product_items_array = data['pgmList'][0]['response']['docs']
+    for product_data in product_items_array:
+        # TODO: Extract the data from the response and sanitize
+        extracted_data = {
+        "objectID": product_data.get("id", "N/A"),
+        "name": product_data.get("name", "N/A"),
+        "basePrice": product_data.get('price', "N/A"),
+        "unitOfMeasure": product_data.get("unitOfMeasure", "N/A"),
+        "pricePer": product_data.get('pricePer', "N/A"),
+        "averageWeight": product_data.get("averageWeight", ["N/A"])[0],  # Taking the first element of the list
+        "storeName": "Safeway",
+    }
+        upload_to_algolia(extracted_data)
     return jsonify(data), 200
 
 
