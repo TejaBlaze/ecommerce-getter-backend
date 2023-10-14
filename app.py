@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from scripts.walmart import search_walmart
 from scripts.safeway import search_safeway 
-from utils import upload_to_algolia
+from utils import upload_to_algolia, search_algolia
 # Custom modules
 
 load_dotenv()
@@ -67,6 +67,11 @@ def scrape_safeway_store():
     return jsonify(data), 200
 
 
+@app.route('/search', methods=['POST'])
+def search_baskeasy_store():
+    data = request.get_json()
+    query = data.get('query')
+    return jsonify(search_algolia(query)), 200
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)

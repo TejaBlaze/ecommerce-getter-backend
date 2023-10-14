@@ -26,7 +26,7 @@ def search_safeway(search_query):
 
     params = {
         # ! THIS REQUEST ID IS UNIQUE TO EACH SESSION and ROTATES EVERY 5mins
-        'request-id': '6681697245858172644',
+        'request-id': os.environ.get("REQUEST_ID"),
         'url': 'https://www.safeway.com',
         'pageurl': 'https://www.safeway.com',
         'pagename': 'search',
