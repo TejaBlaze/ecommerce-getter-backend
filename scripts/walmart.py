@@ -1,3 +1,8 @@
+# External modules
+import os
+import json
+import requests
+
 def search_walmart(search_query):
     base_url = "https://www.walmart.com/orchestra/snb/graphql/Search/8fda6bfee2198e53d801ff1b8dbdb11f8d604542adb91463fdb83d0ad33465fd/search"
     
